@@ -204,7 +204,7 @@ int majorityElement(vector<int>& nums) {
     return ret;
 }
 
-用bit来计算出现次数大于n/2的数字
+用bit来按位计算出现次数大于n/2的数字
 
 ----
 
