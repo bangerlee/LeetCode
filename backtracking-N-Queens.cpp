@@ -1,7 +1,8 @@
+/*
 https://leetcode.com/problems/n-queens/
 
 Runtime: 4 ms
-----
+*/
 class Solution {
 private:
     bool inrow(string& s)
