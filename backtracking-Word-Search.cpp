@@ -1,7 +1,8 @@
+/*
 https://leetcode.com/problems/word-search/submissions/
 
 Runtime: 20 ms
-----
+*/
 class Solution {
 private:
     bool backtrack(vector<vector<char>>& board,string& word,int start,int row,int col,int m,int n){
