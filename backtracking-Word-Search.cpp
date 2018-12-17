@@ -1,5 +1,5 @@
 /*
-https://leetcode.com/problems/word-search/submissions/
+https://leetcode.com/problems/word-search/
 
 Runtime: 20 ms
 */
