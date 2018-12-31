@@ -66,5 +66,35 @@ public class Solution {
 }
 
 ----
+https://leetcode.com/problems/remove-duplicate-letters/
 
+I think this solution is really concise! But I want to add some detailed explainations to show why we do so to solve the problem, This problem is in fact similiar to the problem "Largest Rectangle under the histogram "
 
+We need to keep the monotically decreasing substring that contains all the char in the s. So we just use a vector to mimic the stack! Just similiar to the previous many solutions that use the vector to simulate a stack.
+
+In fact this problem is also similiar to the problem that the maximum in the sliding windows, I strongly recommend you to grasp the sliding windows solutions.
+
+Here is the AC C++ implementation
+
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        vector<int> dict(256, 0);
+        vector<bool> visited(256, false);
+        for(auto ch : s)  dict[ch]++;
+        string result = "0";
+        /** the key idea is to keep a monotically increasing sequence **/
+        for(auto c : s) {
+            dict[c]--;
+            /** to filter the previously visited elements **/
+            if(visited[c])  continue;
+            while(c < result.back() && dict[result.back()]) {
+                visited[result.back()] = false;
+                result.pop_back();
+            }
+            result += c;
+            visited[c] = true;
+        }
+        return result.substr(1);
+    }
+};
