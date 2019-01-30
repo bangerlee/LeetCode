@@ -1,6 +1,11 @@
 /*
 https://leetcode.com/problems/minimum-increment-to-make-array-unique/
 
+Sort the array.
+Compared with previous number,
+the current number need to be at least prev + 1.
+Time Complexity: O(NlogN)
+
 */
 class Solution {
 public:
