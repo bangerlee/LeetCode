@@ -1,3 +1,9 @@
+Tree特点：
+1、binary tree inorder traversal 得到有序序列
+2、root节点在n，则左子节点2n、右子节点2n+1
+
+--
+
 Learn one iterative inorder traversal, apply it to multiple tree questions (Java Solution)
 
 I will show you all how to tackle various tree questions using iterative inorder traversal. First one is the standard iterative inorder traversal using stack. Hope everyone agrees with this solution.
