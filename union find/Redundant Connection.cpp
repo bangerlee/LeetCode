@@ -1,6 +1,7 @@
 /*
 https://leetcode.com/problems/redundant-connection/
 
+https://en.wikipedia.org/wiki/Disjoint-set_data_structure
 */
 class Solution {
 public:
