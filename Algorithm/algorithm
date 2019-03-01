@@ -13,3 +13,8 @@ http://www.cs.utexas.edu/~moore/best-ideas/mjrty/
 169. Majority Element
 
 ----
+
+Kahn's aglorithm
+
+To do topological sort. This is essentially BFS.
+https://en.wikipedia.org/wiki/Topological_sorting
