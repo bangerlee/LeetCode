@@ -1,0 +1,5 @@
+# Write your MySQL query statement below
+select D1.Id
+from Weather D1,Weather D2
+where D1.Temperature>D2.Temperature
+and TO_DAYS(D1.RecordDate)-TO_DAYS(D2.RecordDate)=1
