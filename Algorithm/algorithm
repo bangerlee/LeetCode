@@ -18,3 +18,12 @@ Kahn's algorithm
 
 To do topological sort. This is essentially BFS.
 https://en.wikipedia.org/wiki/Topological_sorting
+
+----
+
+Dijkstra
+
+
+----
+
+Bellman-Ford
