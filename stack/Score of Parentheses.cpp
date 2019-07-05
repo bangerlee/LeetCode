@@ -8,13 +8,11 @@ public:
     int scoreOfParentheses(string S) {
         stack<int> st;
         st.push(0);
-        for(char c : S){
+        for(char c:S){
             if(c=='(') st.push(0);
             else{
-                int val=st.top();
-                st.pop();
-                val=st.top()+max(val*2,1);
-                st.pop();
+                int val=st.top();st.pop();
+                val=st.top()+max(val*2,1); st.pop();
                 st.push(val);
             }
         }
