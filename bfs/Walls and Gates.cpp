@@ -2,32 +2,26 @@
 https://leetcode.com/problems/walls-and-gates/
 
 */
+
 class Solution {
 public:
     void wallsAndGates(vector<vector<int>>& rooms) {
-        queue<pair<int,int>> q;
-        for(int i=0;i<rooms.size();i++)
-            for(int j=0;j<rooms[i].size();j++)
+        queue<vector<int>> q;
+        vector<vector<int>> dirs={{1,0},{-1,0},{0,1},{0,-1}};
+        int m=rooms.size();
+        if(m==0) return;
+        int n=rooms[0].size();
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++)
                 if(rooms[i][j]==0) q.push({i,j});
+        }
         while(!q.empty()){
-            pair<int,int> p=q.front();
-            q.pop();
-            int row=p.first,col=p.second;
-            if(row>0&&rooms[row-1][col]==INT_MAX){
-                rooms[row-1][col]=rooms[row][col]+1;
-                q.push({row-1,col});
-            }
-            if(col>0&&rooms[row][col-1]==INT_MAX){
-                rooms[row][col-1]=rooms[row][col]+1;
-                q.push({row,col-1});
-            }
-            if(row<rooms.size()-1&&rooms[row+1][col]==INT_MAX){
-                rooms[row+1][col]=rooms[row][col]+1;
-                q.push({row+1,col});
-            }
-            if(col<rooms[row].size()-1&&rooms[row][col+1]==INT_MAX){
-                rooms[row][col+1]=rooms[row][col]+1;
-                q.push({row,col+1});
+            vector<int> cur=q.front();q.pop();
+            for(int i=0;i<dirs.size();i++){
+                int x=cur[0]+dirs[i][0], y=cur[1]+dirs[i][1];
+                if(x<0||x>=m||y<0||y>=n||rooms[x][y]!=INT_MAX) continue;
+                rooms[x][y]=rooms[cur[0]][cur[1]]+1;
+                q.push({x,y});
             }
         }
     }
