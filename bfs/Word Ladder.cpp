@@ -13,8 +13,7 @@ public:
         while(!todo.empty()){
             int m=todo.size();
             for(int i=0;i<m;i++){
-                string word=todo.front();
-                todo.pop();
+                string word=todo.front();todo.pop();
                 if(word==endWord) return res;
                 for(int j=0;j<word.size();j++){
                     char c=word[j];
