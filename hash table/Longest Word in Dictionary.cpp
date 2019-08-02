@@ -8,10 +8,10 @@ public:
         sort(words.begin(),words.end());
         unordered_set<string> s;
         string res="";
-        for(string x:words){
-            if(x.length()==1||s.count(x.substr(0,x.length()-1))){
-                res=res.length()<x.length()?x:res;
-                s.insert(x);
+        for(string w:words){
+            if(w.length()==1 || s.count(w.substr(0,w.length()-1))){
+                res=res.length()<w.length()?w:res;
+                s.insert(w);
             }
         }
         return res;
