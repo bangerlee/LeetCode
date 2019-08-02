@@ -9,17 +9,17 @@ A small vector is used to keep the keys
 A hash function is used
 A link list is used to track collisions
 */
-struct hashNode {
-    std::list<pair<int, int>> _list;
-
-    std::list<pair<int, int>>::iterator myFind(int key) {
-        return std::find_if(
-                _list.begin(), _list.end(),
-                [key](pair<int, int> a) { return (a.first == key); });
-    }
-};
-
 class MyHashMap {
+private:
+    struct hashNode {
+        std::list<pair<int, int>> _list;
+        std::list<pair<int, int>>::iterator myFind(int key) {
+            return std::find_if(_list.begin(), _list.end(),
+                [key](pair<int, int> a) { return (a.first == key); });
+        }
+    };
+    std::vector<hashNode> _v;
+    int _size = 100;    
 public:
     /** Initialize your data structure here. */
     MyHashMap() {
@@ -64,8 +64,4 @@ public:
     int hash(int key) {
         return key % _size;
     }
-
-
-    std::vector<hashNode> _v;
-    int _size = 100;
 };
