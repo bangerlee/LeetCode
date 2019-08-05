@@ -1,20 +1,22 @@
 /*
 https://leetcode.com/problems/minimum-area-rectangle/
+
 */
 class Solution {
 public:
     int minAreaRect(vector<vector<int>>& points) {
-        set<pair<int,int>> sp;
+        unordered_map<int, set<int>> x;
         int res=INT_MAX;
-        for(auto point:points)
-            sp.insert({point[0],point[1]});
-        for(auto point0:points){
-            for(auto point1:points){
-                if(point0[0]==point1[0]||point0[1]==point1[1]) continue;
-                if(sp.count({point0[0],point1[1]})&&sp.count({point1[0],point0[1]}))
-                    res=min(res,abs((point0[0]-point1[0])*(point0[1]-point1[1])));
-            }
+        for (auto p : points) x[p[0]].insert(p[1]);
+        for (auto i = x.begin(); i != x.end(); ++i)
+            for (auto j = next(i); j != x.end(); ++j) {
+                if (i->second.size() < 2 || j->second.size() < 2) continue;
+                vector<int> y;
+                set_intersection(begin(i->second), end(i->second),
+                begin(j->second), end(j->second), back_inserter(y));
+            for (int k = 1; k < y.size(); ++k)
+            res = min(res, abs(j->first - i->first) * (y[k] - y[k - 1]));
         }
-        return res==INT_MAX?0:res;
+        return res == INT_MAX ? 0 : res;  
     }
 };
