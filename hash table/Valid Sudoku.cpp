@@ -1,10 +1,11 @@
 /*
 https://leetcode.com/problems/valid-sudoku/
+
 */
 class Solution {
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
-        set<string> ss;
+        unordered_set<string> ss;
         for(int i=0;i<9;i++){
             string si=to_string(i);
             for(int j=0;j<9;j++){
