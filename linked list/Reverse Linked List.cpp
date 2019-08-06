@@ -1,8 +1,3 @@
-/*
-https://leetcode.com/problems/reverse-linked-list/
-
-Runtime: 4 ms
-*/
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -14,18 +9,17 @@ Runtime: 4 ms
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if(head==NULL)
-            return head;
-        ListNode* idx=head;
-        ListNode* a=idx->next;
-        ListNode* b=NULL;
-        while(a!=NULL){
-            idx->next=b;
-            b=idx;
-            idx=a;
-            a=a->next;
+        if(head==NULL) return NULL;
+        ListNode* cur=head;
+        ListNode* p=cur->next;
+        ListNode* pre=NULL;
+        while(p!=NULL){
+            cur->next=pre;
+            pre=cur;
+            cur=p;
+            p=p->next;
         }
-        idx->next=b;
-        return idx;
+        cur->next=pre;
+        return cur;
     }
 };
