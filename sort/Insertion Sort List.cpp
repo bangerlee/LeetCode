@@ -1,7 +1,6 @@
 /*
 https://leetcode.com/problems/insertion-sort-list/
 
-Runtime: 44 ms
 */
 /**
  * Definition for singly-linked list.
@@ -14,37 +13,18 @@ Runtime: 44 ms
 class Solution {
 public:
     ListNode* insertionSortList(ListNode* head) {
-        if(head==NULL||head->next==NULL) return head;
-        //ListNode* phead=head;
-        ListNode* p=head->next;
-        //ListNode* a=head;
-        //a->next=NULL;
-        head->next=NULL;
-        while(p!=NULL){
-            ListNode* phead=head;
-            ListNode* pr=NULL;
-            while(phead!=NULL && p->val>=phead->val)
-            {
-                pr=phead;
-                phead=phead->next;
-            }
-            if(phead==head){
-                phead=p;
-                p=p->next;
-                phead->next=head;
-                head=phead;
-            }
-            else if(phead==NULL){
-                pr->next=p;
-                p=p->next;
-                pr->next->next=NULL;
-            }
-            else{
-                pr->next=p;
-                p=p->next;
-                pr->next->next=phead;
-            }
+        ListNode* dummy=new ListNode(0);
+        ListNode* cur=head;
+        ListNode* prev=dummy;
+        ListNode* next=NULL;
+        while(cur){
+            next=cur->next;
+            if(!prev||!prev->next||prev->next->val>=cur->val) prev=dummy;
+            while(prev->next&&prev->next->val<cur->val) prev=prev->next;
+            cur->next=prev->next;
+            prev->next=cur;
+            cur=next;
         }
-        return head;
+        return dummy->next;
     }
 };
