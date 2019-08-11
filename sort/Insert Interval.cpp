@@ -4,20 +4,17 @@ https://leetcode.com/problems/insert-interval/
 */
 class Solution {
 public:
-    vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
-        vector<Interval> res;
-        int index = 0;
-        while(index < intervals.size() && intervals[index].end < newInterval.start){
-            res.push_back(intervals[index++]);
-        }
-        while(index < intervals.size() && intervals[index].start <= newInterval.end){
-            newInterval.start = min(newInterval.start, intervals[index].start);
-            newInterval.end = max(newInterval.end, intervals[index].end);
-            index++;
-        }
-        res.push_back(newInterval);
-        while(index < intervals.size()){
-            res.push_back(intervals[index++]);
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        vector<vector<int>> res;
+        intervals.push_back(newInterval);
+        if(intervals.size()==1) return intervals;
+        sort(intervals.begin(),intervals.end(),[](vector<int>&a,vector<int>&b){
+            return b[0]>a[0];
+        });
+        res.push_back(intervals[0]);
+        for(int i=1;i<intervals.size();i++){
+            if(intervals[i][0]>res.back()[1]) res.push_back(intervals[i]);
+            else res.back()[1]=max(res.back()[1],intervals[i][1]);
         }
         return res;
     }
