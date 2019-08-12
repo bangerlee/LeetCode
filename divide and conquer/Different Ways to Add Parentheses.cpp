@@ -3,27 +3,27 @@ https://leetcode.com/problems/different-ways-to-add-parentheses/
 
 */
 class Solution {
+private:
+    unordered_map<string,vector<int>> m;
 public:
     vector<int> diffWaysToCompute(string input) {
+        if(m.count(input)) return m[input];
         vector<int> res;
-        for(int i=0;i<input.length();i++){
-            if(input[i]=='+'||input[i]=='*'||input[i]=='-'){
-                string p1=input.substr(0,i);
-                string p2=input.substr(i+1);
-                vector<int> res1=diffWaysToCompute(p1);
-                vector<int> res2=diffWaysToCompute(p2);
-                for(int l:res1){
-                    for(int r:res2){
-                        switch(input[i]){
-                            case '+': res.push_back(l+r);break;
-                            case '-': res.push_back(l-r);break;
-                            default: res.push_back(l*r);
+        for(int i=0;i<input.size();i++){
+            if(input[i]<'0'){
+                vector<int> v1=diffWaysToCompute(input.substr(0,i));
+                vector<int> v2=diffWaysToCompute(input.substr(i+1));
+                for(int i1:v1)
+                    for(int i2:v2)
+                        switch (input[i]){
+                            case '+': res.push_back(i1+i2);break;
+                            case '-': res.push_back(i1-i2);break;
+                            case '*': res.push_back(i1*i2);
                         }
-                    }
-                }
             }
         }
         if(res.empty()) res.push_back(stoi(input));
+        m[input]=res;
         return res;
     }
 };
