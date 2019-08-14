@@ -1,18 +1,16 @@
 /*
 https://leetcode.com/problems/k-diff-pairs-in-an-array/
 
-Runtime: 32 ms
 */
 class Solution {
 public:
     int findPairs(vector<int>& nums, int k) {
+        int res=0;
         sort(nums.begin(),nums.end());
-        int i=0,res=0;
-        for(int j=1;j<nums.size();){
-            if(nums[j]-nums[i]<k||i>=j) j++;
-            else if(i>0&&nums[i]==nums[i-1]||(nums[j]-nums[i]>k)) i++;
-            else
-                res++,i++;
+        for(int i=0,j=0;i<nums.size();i++){
+            for(j=max(j,i+1);j<nums.size()&&(long)nums[j]-nums[i]<k;j++);
+            if(j<nums.size()&&(long)nums[j]-nums[i]==k) res++;
+            while(i+1<nums.size()&&nums[i]==nums[i+1]) i++;
         }
         return res;
     }
