@@ -1,7 +1,6 @@
 /*
 https://leetcode.com/problems/subarray-product-less-than-k/
 
-Runtime: 132 ms
 */
 class Solution {
 public:
@@ -10,8 +9,7 @@ public:
         if(k==0) return 0;
         for(int j=0;j<nums.size();j++){
             product*=nums[j];
-            while(i<=j&&product>=k)
-                product/=nums[i++];
+            while(i<=j&&product>=k) product/=nums[i++];
             res+=j-i+1;
         }
         return res;
