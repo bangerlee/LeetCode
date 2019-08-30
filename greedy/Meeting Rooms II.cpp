@@ -2,37 +2,17 @@
 https://leetcode.com/problems/meeting-rooms-ii/
 
 */
-/**
- * Definition for an interval.
- * struct Interval {
- *     int start;
- *     int end;
- *     Interval() : start(0), end(0) {}
- *     Interval(int s, int e) : start(s), end(e) {}
- * };
- */
 class Solution {
 public:
-    int minMeetingRooms(vector<Interval>& intervals) {
-        int n=intervals.size();
-        if(n==0) return 0;
-        sort(intervals.begin(),intervals.end(),[](Interval &a,Interval &b){
-            return b.start>a.start;
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        sort(intervals.begin(),intervals.end(),[](vector<int> &a, vector<int> &b){
+            return b[0]>a[0];
         });
-        vector<bool> r(n,true);
-        for(int i=0;i<n;i++){
-            if(r[i]==false) continue;
-            Interval tmp=intervals[i];
-            for(int j=i+1;j<n;j++){
-                if(r[j]==false) continue;
-                if(intervals[j].start>=tmp.end){
-                    tmp=intervals[j];
-                    r[j]=false;
-                }
-            }
+        priority_queue<int, vector<int>, greater<int>> pq;
+        for(auto interval:intervals){
+            if(!pq.empty() && pq.top()<=interval[0]) pq.pop();
+            pq.push(interval[1]);
         }
-        int res=0;
-        for(bool x:r) if(x) res++;
-        return res;
+        return pq.size();
     }
 };
