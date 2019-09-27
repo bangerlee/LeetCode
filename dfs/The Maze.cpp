@@ -3,33 +3,29 @@ https://leetcode.com/problems/the-maze/
 
 */
 class Solution {
-public:
-    bool hasPath(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination) {
-        queue<pair<int,int>> v;
+private:
+    bool dfs(vector<vector<int>>& maze,vector<vector<int>>& visited,int row,int col,vector<int>& des){
         int m=maze.size(),n=maze[0].size();
-        vector<vector<bool>> visited(m,vector<bool>(n,false));
-        if(start[0]==destination[0]&&start[1]==destination[1]) return true;
-        vector<vector<int>> dir={{-1,0},{1,0},{0,1},{0,-1}};
-        visited[start[0]][start[1]]=true;
-        v.push({start[0],start[1]});
-        while(!v.empty()){
-            pair<int,int> point=v.front();
-            v.pop();
-            int x=point.first,y=point.second;
-            for(int i=0;i<4;i++){
-                int xx=x,yy=y;
-                while(xx>=0&&yy>=0&&xx<m&&yy<n&&maze[xx][yy]==0){
-                    xx+=dir[i][0];
-                    yy+=dir[i][1];
-                }
-                xx-=dir[i][0];
-                yy-=dir[i][1];
-                if(visited[xx][yy]) continue;
-                visited[xx][yy]=true;
-                if(xx==destination[0]&&yy==destination[1]) return true;
-                v.push({xx,yy});
+        if(visited[row][col]) return false;
+        visited[row][col]=1;
+        if(row==des[0]&&col==des[1]) return true;
+        vector<int> d1({0,1,0,-1}),d2({1,0,-1,0});
+        for(int i=0;i<4;i++){
+            int r=row+d1[i],c=col+d2[i];
+            while(r>=0&&r<m&&c>=0&&c<n&&maze[r][c]==0){
+                r+=d1[i];
+                c+=d2[i];
             }
+            r-=d1[i];
+            c-=d2[i];
+            if(dfs(maze,visited,r,c,des)) return true;
         }
         return false;
+    }
+public:
+    bool hasPath(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination) {
+        int m=maze.size(),n=maze[0].size();
+        vector<vector<int>> visited(m,vector<int>(n,0));
+        return dfs(maze,visited,start[0],start[1],destination);
     }
 };
